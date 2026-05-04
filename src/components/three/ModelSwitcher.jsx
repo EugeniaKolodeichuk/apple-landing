@@ -1,4 +1,4 @@
-import { PresentationControls } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { useRef } from "react"
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -49,26 +49,15 @@ const ModelSwitcher = ({ scale, isMobile }) => {
         }
     }, [scale]);
 
-    const controlsConfig = {
-        snap: true,
-        speed: 1,
-        zoom: 1,
-        azimuth: [-Infinity, Infinity],
-        config: { mass: 1, tension: 0, friction: 26 },
-    }
-
     return (
         <>
-            <PresentationControls {...controlsConfig}>
-                <group ref={largeMacbookRef}>
-                    <MacbookModel16 scale={isMobile ? SCALE_LARGE_MOBILE : SCALE_LARGE_DESKTOP} />
-                </group>
-            </PresentationControls>
-            <PresentationControls {...controlsConfig}>
-                <group ref={smallMacbookRef}>
-                    <MacbookModel14 scale={isMobile ? 0.03 : 0.06} />
-                </group>
-            </PresentationControls>
+            <OrbitControls enableZoom={false} enablePan={false} />
+            <group ref={largeMacbookRef}>
+                <MacbookModel16 scale={isMobile ? SCALE_LARGE_MOBILE : SCALE_LARGE_DESKTOP} />
+            </group>
+            <group ref={smallMacbookRef}>
+                <MacbookModel14 scale={isMobile ? 0.03 : 0.06} />
+            </group>
         </>
     )
 }
